@@ -1,1 +1,2 @@
-# Study_C
+# Tree in C
+<img src='./img/treeimg.png'/>

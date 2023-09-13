@@ -7,7 +7,7 @@ typedef struct TreeNode {
 	struct TreeNode* left, * right;
 }treenode;
 
-//링크 트리 생성
+//??? ??? ????
 treenode* link() {
 	treenode* n1, *n2, *n3, *n4, *n5, *n6, *n7, *n8, *n9, *n10, *n11;
 	n1 = (treenode*)malloc(sizeof(treenode));
@@ -69,7 +69,7 @@ treenode* link() {
 	return &n1;
 }
 
-//배열 트리 생성
+//?? ??? ????
 treenode n4 = { 4,NULL,NULL };
 treenode n5 = { 5,NULL,NULL };
 treenode n6 = { 6,NULL,NULL };
@@ -84,7 +84,7 @@ treenode n1 = { 1,&n2,&n7 };
 	
 treenode* root = &n1;
 
-//중위 순회
+//inorder
 inorder(treenode* root) {
 	if (root) {
 		inorder(root->left);
@@ -93,7 +93,7 @@ inorder(treenode* root) {
 	}
 }
 
-//전위 순회
+//preorder
 preorder(treenode* root) {
 	if (root) {
 		printf("%d ", root->data);
@@ -102,6 +102,7 @@ preorder(treenode* root) {
 	}
 }
 
+//postorder
 postorder(treenode* root) {
 	if (root) {
 		postorder(root->left);
@@ -115,30 +116,32 @@ int main(void) {
 	treenode* linkenode = &n1;
 
 	printf("<Linked Tree>\n");
-	printf("1. 전위 순회\n");
+	printf("1. preorder\n");
 	preorder(linkenode);
 	printf("\n");
 
-	printf("\n2. 중위 순회\n");
+	printf("\n2. inorder\n");
 	inorder(linkenode);
 	printf("\n");
 
-	printf("\n3. 중위 순회\n");
+	printf("\n3. postorder  \n");
 	postorder(linkenode);
 	printf("\n");
-	printf("\n");
 
-	printf("<Array Tree>\n");
-	printf("1. 전위 순회\n");
+
+
+	    printf("\n\n<Array Tree>\n");
+	printf("1. preorder\n");
 	preorder(root);
 	printf("\n");
 
-	printf("\n2. 중위 순회\n");
+	printf("\n2. inorder\n");
 	inorder(root);
 	printf("\n");
 
-	printf("\n3. 중위 순회\n");
+	printf("\n3. postorder  \n");
 	postorder(root);
-
+	printf("\n");
+	printf("\n");
 	return 0;
 }
