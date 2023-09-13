@@ -1,2 +1,2 @@
 # Tree in C
-<img src='./img/treeimg.png'/>
+<img src="./tree_test.dSYM/img/treeimg.png"/>
