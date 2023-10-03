@@ -7,7 +7,7 @@ typedef struct TreeNode {
 	struct TreeNode *right;
 }TreeNode;
 
-//³ëµå Ãß°¡ ÇÔ¼ö 
+//ë…¸ë“œ ì¶”ê°€ í•¨ìˆ˜ 
 TreeNode* createnode(int data) {
 	TreeNode* newnode = (TreeNode*)malloc(sizeof(TreeNode));
 	newnode->data = data;
@@ -15,7 +15,7 @@ TreeNode* createnode(int data) {
 	return newnode;
 }
 
-//ÁßÀ§ ¼øÈ¸ ÇÔ¼ö(Àç±Í)
+//ì¤‘ìœ„ ìˆœíšŒ í•¨ìˆ˜(ì¬ê·€)
 void inorder(TreeNode* root, int* node_count) {
 	if (root == NULL) return;
 	inorder(root->left,node_count);
@@ -24,7 +24,7 @@ void inorder(TreeNode* root, int* node_count) {
 	inorder(root->right, node_count);
 }
 
-// °¡Àå ÀÛÀº °ªÀ» Ã£´Â ÇÔ¼ö(ÃÖ¼Ò°ª ³ëµå ¹İÈ¯)
+// ê°€ì¥ ì‘ì€ ê°’ì„ ì°¾ëŠ” í•¨ìˆ˜(ìµœì†Œê°’ ë…¸ë“œ ë°˜í™˜)
 TreeNode* minValueNode(TreeNode* node) {
 	TreeNode* current = node;
 	while (current->left != NULL) {
@@ -33,13 +33,13 @@ TreeNode* minValueNode(TreeNode* node) {
 	return current;
 }
 
-//³ëµå »èÁ¦ ÇÔ¼ö(Àç±Í)
+//ë…¸ë“œ ì‚­ì œ í•¨ìˆ˜(ì¬ê·€)
 TreeNode* delete_recursive(TreeNode* root, int data, int* node_count) {
 	if (root == NULL) {
 		return root;
 	}
 
-	// »èÁ¦ÇÒ ³ëµå Ã£±â
+	// ì‚­ì œí•  ë…¸ë“œ ì°¾ê¸°
 	(*node_count)++;
 	if (data < root->data) {
 		root->left = delete_recursive(root->left, data, node_count);
@@ -59,7 +59,7 @@ TreeNode* delete_recursive(TreeNode* root, int data, int* node_count) {
 			return temp;
 		}
 
-		// µÎ °³ÀÇ ÀÚ½Ä ³ëµå°¡ ÀÖ´Â °æ¿ì
+		// ë‘ ê°œì˜ ìì‹ ë…¸ë“œê°€ ìˆëŠ” ê²½ìš°
 		TreeNode* temp = minValueNode(root->right);
 		root->data = temp->data;
 		root->right = delete_recursive(root->right, temp->data, node_count);
@@ -68,13 +68,13 @@ TreeNode* delete_recursive(TreeNode* root, int data, int* node_count) {
 	return root;
 }
 
-//³ëµå »èÁ¦ ÇÔ¼ö(¹İº¹)
+//ë…¸ë“œ ì‚­ì œ í•¨ìˆ˜(ë°˜ë³µ)
 TreeNode* delete_iterative(TreeNode* root, int data, int* node_count) {
 	TreeNode* current = root;
 	TreeNode* parent = NULL;
-	TreeNode* parent_stack[100]; // ºÎ¸ğ ³ëµå¸¦ ÀúÀåÇÏ´Â ½ºÅÃ (ÃæºĞÇÑ Å©±â·Î Á¶Àı)
+	TreeNode* parent_stack[100]; // ë¶€ëª¨ ë…¸ë“œë¥¼ ì €ì¥í•˜ëŠ” ìŠ¤íƒ (ì¶©ë¶„í•œ í¬ê¸°ë¡œ ì¡°ì ˆ)
 
-	// ³ëµå¸¦ Ã£¾Æ°¡¸ç ½ºÅÃ¿¡ ºÎ¸ğ ³ëµå ÀúÀå
+	// ë…¸ë“œë¥¼ ì°¾ì•„ê°€ë©° ìŠ¤íƒì— ë¶€ëª¨ ë…¸ë“œ ì €ì¥
 	while (current != NULL && current->data != data) {
 		parent = current;
 		parent_stack[*node_count] = parent;
@@ -89,15 +89,15 @@ TreeNode* delete_iterative(TreeNode* root, int data, int* node_count) {
 	}
 
 	if (current == NULL) {
-		// »èÁ¦ÇÒ ³ëµå°¡ Á¸ÀçÇÏÁö ¾ÊÀ½
+		// ì‚­ì œí•  ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ
 		return root;
 	}
 
-	// »èÁ¦ÇÒ ³ëµå¸¦ Ã£¾ÒÀ» °æ¿ì
+	// ì‚­ì œí•  ë…¸ë“œë¥¼ ì°¾ì•˜ì„ ê²½ìš°
 	if (current->left == NULL) {
-		// ¿ŞÂÊ ÀÚ½ÄÀÌ ¾ø´Â °æ¿ì
+		// ì™¼ìª½ ìì‹ì´ ì—†ëŠ” ê²½ìš°
 		if (parent == NULL) {
-			// ·çÆ® ³ëµå¸¦ »èÁ¦ÇÏ´Â °æ¿ì
+			// ë£¨íŠ¸ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” ê²½ìš°
 			TreeNode* temp = current->right;
 			free(current);
 			return temp;
@@ -111,9 +111,9 @@ TreeNode* delete_iterative(TreeNode* root, int data, int* node_count) {
 		free(current);
 	}
 	else if (current->right == NULL) {
-		// ¿À¸¥ÂÊ ÀÚ½ÄÀÌ ¾ø´Â °æ¿ì
+		// ì˜¤ë¥¸ìª½ ìì‹ì´ ì—†ëŠ” ê²½ìš°
 		if (parent == NULL) {
-			// ·çÆ® ³ëµå¸¦ »èÁ¦ÇÏ´Â °æ¿ì
+			// ë£¨íŠ¸ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” ê²½ìš°
 			TreeNode* temp = current->left;
 			free(current);
 			return temp;
@@ -127,18 +127,18 @@ TreeNode* delete_iterative(TreeNode* root, int data, int* node_count) {
 		free(current);
 	}
 	else {
-		// µÎ °³ÀÇ ÀÚ½Ä ³ëµå°¡ ÀÖ´Â °æ¿ì
-		TreeNode* temp = minValueNode(current->right); // ¿À¸¥ÂÊ ¼­ºêÆ®¸®¿¡¼­ °¡Àå ÀÛÀº °ªÀ» Ã£À½
-		current->data = temp->data; // »èÁ¦ÇÒ ³ëµåÀÇ °ªÀ» °¡Àå ÀÛÀº °ªÀ¸·Î ´ëÃ¼
+		// ë‘ ê°œì˜ ìì‹ ë…¸ë“œê°€ ìˆëŠ” ê²½ìš°
+		TreeNode* temp = minValueNode(current->right); // ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œ ê°€ì¥ ì‘ì€ ê°’ì„ ì°¾ìŒ
+		current->data = temp->data; // ì‚­ì œí•  ë…¸ë“œì˜ ê°’ì„ ê°€ì¥ ì‘ì€ ê°’ìœ¼ë¡œ ëŒ€ì²´
 
-		// ´ëÃ¼µÈ °ªÀ» °¡Áø ³ëµå¸¦ »èÁ¦ (Àç±ÍÀûÀ¸·Î »èÁ¦ ÇÔ¼ö È£Ãâ)
+		// ëŒ€ì²´ëœ ê°’ì„ ê°€ì§„ ë…¸ë“œë¥¼ ì‚­ì œ (ì¬ê·€ì ìœ¼ë¡œ ì‚­ì œ í•¨ìˆ˜ í˜¸ì¶œ)
 		current->right = delete_recursive(current->right, temp->data, node_count);
 	}
 
 	return root;
 }
 
-//³ëµå »ğÀÔ ÇÔ¼ö(¹İº¹)
+//ë…¸ë“œ ì‚½ì… í•¨ìˆ˜(ë°˜ë³µ)
 TreeNode* insert_iterative(TreeNode* root, int data, int* node_count) {
 	TreeNode* newnode = createnode(data);
 	if (root == NULL) {
@@ -160,9 +160,9 @@ TreeNode* insert_iterative(TreeNode* root, int data, int* node_count) {
 			current = current->right;
 		}
 		else {
-			// Áßº¹µÈ °ªÀº ¿©±â¿¡¼­ Ã³¸®ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-			free(newnode); // Áßº¹ °ªÀº ¹«½ÃÇÏ°í ¸Ş¸ğ¸® ÇØÁ¦
-			return root; // ±âÁ¸ ·çÆ®¸¦ ¹İÈ¯
+			// ì¤‘ë³µëœ ê°’ì€ ì—¬ê¸°ì—ì„œ ì²˜ë¦¬í•  ìˆ˜ ìˆìŒ
+			free(newnode); // ì¤‘ë³µ ê°’ì€ ë¬´ì‹œí•˜ê³  ë©”ëª¨ë¦¬ í•´ì œ
+			return root; // ê¸°ì¡´ ë£¨íŠ¸ë¥¼ ë°˜í™˜
 		}
 	}
 
@@ -176,7 +176,7 @@ TreeNode* insert_iterative(TreeNode* root, int data, int* node_count) {
 	return root;
 }
 
-// ³ëµå »ğÀÔ ÇÔ¼ö(Àç±Í)
+// ë…¸ë“œ ì‚½ì… í•¨ìˆ˜(ì¬ê·€)
 TreeNode* insert(TreeNode* root, int data, int* node_count) {
 
 	if (root == NULL) {
@@ -194,63 +194,63 @@ TreeNode* insert(TreeNode* root, int data, int* node_count) {
 	return root;
 }
 
-//³ëµå ÁßÀ§ ¼øÈ¸ ÇÔ¼ö(Àç±Í)
+//ë…¸ë“œ ì¤‘ìœ„ ìˆœíšŒ í•¨ìˆ˜(ì¬ê·€)
 void inorderwithcount(TreeNode* root) {
 	int node_count = 0;
 	inorder(root, &node_count);
 	printf("\nNumber of nodes visited : %d\n", node_count);
 }
 
-//³ëµå »èÁ¦ ÇÔ¼ö(°Ë»ö¿ë)
+//ë…¸ë“œ ì‚­ì œ í•¨ìˆ˜(ê²€ìƒ‰ìš©)
 TreeNode* node_delete(TreeNode* root, char choice) {
 	int data, node_count=0;
 	printf("value to delete : ");
 	scanf("%d", &data);
-	while (getchar() != '\n'); // ¿£ÅÍ Å°('\n')¸¦ ÀĞ¾î¼­ ¹öÆÛ¸¦ ºñ¿ó´Ï´Ù.
+	while (getchar() != '\n'); // ì—”í„° í‚¤('\n')ë¥¼ ì½ì–´ì„œ ë²„í¼ë¥¼ ë¹„ì›€
 	if (choice == 'd')
 		root = delete_recursive(root, data, &node_count);
 	else if (choice == 'D')
 		root = delete_iterative(root, data, &node_count);
 
 	printf("Number of nodes visited : %d\n", node_count);
-	inorder(root,&node_count); // ³ëµå »èÁ¦ ÈÄ ÁßÀ§ ¼øÈ¸¸¦ ´Ù½Ã ¼öÇàÇÏ¿© Æ®¸® »óÅÂ¸¦ Ãâ·Â
-	return root; // ¼öÁ¤µÈ ·çÆ® ³ëµå¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+	inorder(root,&node_count); // ë…¸ë“œ ì‚­ì œ í›„ ì¤‘ìœ„ ìˆœíšŒë¥¼ ë‹¤ì‹œ ìˆ˜í–‰í•˜ì—¬ íŠ¸ë¦¬ ìƒíƒœë¥¼ ì¶œë ¥
+	return root; // ìˆ˜ì •ëœ ë£¨íŠ¸ ë…¸ë“œë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 }
 
-// ³ëµå »ğÀÔ ÇÔ¼ö(°Ë»ö¿ë)
+// ë…¸ë“œ ì‚½ì… í•¨ìˆ˜(ê²€ìƒ‰ìš©)
 TreeNode* node_insert(TreeNode* root, char choice) {
 	int data, node_count = 1;
 	printf("value to add : ");
 	scanf("%d", &data);
-	while (getchar() != '\n'); // ¿£ÅÍ Å°('\n')¸¦ ÀĞ¾î¼­ ¹öÆÛ¸¦ ºñ¿ó´Ï´Ù.
+	while (getchar() != '\n'); // ì—”í„° í‚¤('\n')ë¥¼ ì½ì–´ì„œ ë²„í¼ë¥¼ ë¹„ì›€
 	if (choice == 'i')
 		root = insert(root, data, &node_count);
 	else if (choice == 'I')
 		root = insert_iterative(root, data, &node_count);
 
 	printf("Number of nodes visited : %d\n", node_count);
-	inorder(root, &node_count); // ³ëµå »èÁ¦ ÈÄ ÁßÀ§ ¼øÈ¸¸¦ ´Ù½Ã ¼öÇàÇÏ¿© Æ®¸® »óÅÂ¸¦ Ãâ·Â
-	return root; // ¼öÁ¤µÈ ·çÆ® ³ëµå¸¦ ¹İÈ¯
+	inorder(root, &node_count); // ë…¸ë“œ ì‚­ì œ í›„ ì¤‘ìœ„ ìˆœíšŒë¥¼ ë‹¤ì‹œ ìˆ˜í–‰í•˜ì—¬ íŠ¸ë¦¬ ìƒíƒœë¥¼ ì¶œë ¥
+	return root; // ìˆ˜ì •ëœ ë£¨íŠ¸ ë…¸ë“œë¥¼ ë°˜í™˜
 }
 
-//³ëµå °Ë»ö ÇÔ¼ö(¹İº¹)
+//ë…¸ë“œ ê²€ìƒ‰ í•¨ìˆ˜(ë°˜ë³µ)
 void search(TreeNode* root, int data) {
-	int node_count = 0; //Number of nodes visited º¯¼ö
+	int node_count = 0; //Number of nodes visited ë³€ìˆ˜
 
 	while (root != NULL)
 	{
-		if (data == root->data) { //rootÀÇ °ª°ú Ã£°íÀÚ ÇÏ´Â ³ëµåÀÇ °ªÀÌ ÀÏÄ¡ÇÒ °æ¿ì  °Ë»ö ¼º°ø + ¹æ¹® ³ëµåÀÇ ¼ö Ãâ·Â
+		if (data == root->data) { //rootì˜ ê°’ê³¼ ì°¾ê³ ì í•˜ëŠ” ë…¸ë“œì˜ ê°’ì´ ì¼ì¹˜í•  ê²½ìš°  ê²€ìƒ‰ ì„±ê³µ + ë°©ë¬¸ ë…¸ë“œì˜ ìˆ˜ ì¶œë ¥
 			node_count += 1;
 			printf("search success : %d\n", root->data);
 			printf("Number of nodes visited : %d\n", node_count);
 			break;
 		}
-		//dataÀÇ °ªÀÌ ÇöÀç ³ëµå °ªº¸´Ù ÀÛÀ¸¸é ¿ŞÂÊ ¼­ºê Æ®¸®·Î ÀÌµ¿
+		//dataì˜ ê°’ì´ í˜„ì¬ ë…¸ë“œ ê°’ë³´ë‹¤ ì‘ìœ¼ë©´ ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ë¡œ ì´ë™
 		else if (data < root->data) {
 			node_count += 1;
 			root = root->left;
 		}
-		//dataÀÇ °ªÀÌ ÇöÀç ³ëµå °ªº¸´Ù Å©¸é ¿À¸¥ÂÊ ¼­ºê Æ®¸®·Î ÀÌµ¿
+		//dataì˜ ê°’ì´ í˜„ì¬ ë…¸ë“œ ê°’ë³´ë‹¤ í¬ë©´ ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ë¡œ ì´ë™
 		else {
 			node_count += 1;
 			root = root->right;
@@ -259,14 +259,14 @@ void search(TreeNode* root, int data) {
     
 }
 
-//³ëµå °Ë»ö ÇÔ¼ö(°Ë»ö¿ë)
+//ë…¸ë“œ ê²€ìƒ‰ í•¨ìˆ˜(ê²€ìƒ‰ìš©)
 void node_search(TreeNode* root) {
 	int find_num, node_count = 0;
 	printf("value to search : ");
 	scanf("%d", &find_num);
-	while (getchar() != '\n'); // ¿£ÅÍ Å°('\n')¸¦ ÀĞ¾î¼­ ¹öÆÛ¸¦ ºñ¿ò
+	while (getchar() != '\n'); // ì—”í„° í‚¤('\n')ë¥¼ ì½ì–´ì„œ ë²„í¼ë¥¼ ë¹„ì›€
 	search(root, find_num);
-	inorder(root, &node_count); // ³ëµå »èÁ¦ ÈÄ ÁßÀ§ ¼øÈ¸¸¦ ´Ù½Ã ¼öÇàÇÏ¿© Æ®¸® »óÅÂ¸¦ Ãâ·Â
+	inorder(root, &node_count); // ë…¸ë“œ ì‚­ì œ í›„ ì¤‘ìœ„ ìˆœíšŒë¥¼ ë‹¤ì‹œ ìˆ˜í–‰í•˜ì—¬ íŠ¸ë¦¬ ìƒíƒœë¥¼ ì¶œë ¥
 }
 
 void menu(){
@@ -282,22 +282,22 @@ void menu(){
 }
 
 int main(){
-    //±âº» ³ëµå ¼³Á¤
+	//ë…¸ë“œ ì„¤ì •
 	TreeNode* root = createnode(60);
-	//·¹º§ 1
+	//ë ˆë²¨ 1
 	root->left = createnode(41);
 	root->right = createnode(74);
-	//·¹º§ 2
+	//ë ˆë²¨ 2
 	root->left->left = createnode(16);
 	root->left->right = createnode(53);
 	root->right->left = createnode(65);
-	//·¹º§ 3
+	//ë ˆë²¨ 3
 	root->left->left->right = createnode(25);
 	root->left->right->left = createnode(46);
 	root->left->right->right = createnode(55);
 	root->right->left->left = createnode(63);
 	root->right->left->right = createnode(70);
-	//·¹º§ 4
+	//ë ˆë²¨ 4
 	root->left->right->left->left = createnode(42);
 	root->right->left->left->left = createnode(62);
 	root->right->left->left->right = createnode(64);
@@ -310,25 +310,25 @@ int main(){
         scanf("%c" ,&choice);
 
         if (choice == 's') {
-			node_search(root);
-			printf("\n\n");
-		}
-		else if (choice == 'i' || choice == 'I') {
-			root = node_insert(root, choice);
-			printf("\n\n");
-		}
-		else if (choice == 'd' || choice == 'D') {
-			root = node_delete(root, choice);
-			printf("\n\n");
-		}
-		else if (choice == 't') {
-			inorderwithcount(root);
-			printf("\n");
-		}
-		else if (choice == 'c')
-			break;
+		node_search(root);
+		printf("\n\n");
+	}
+	else if (choice == 'i' || choice == 'I') {
+		root = node_insert(root, choice);
+		printf("\n\n");
+	}
+	else if (choice == 'd' || choice == 'D') {
+		root = node_delete(root, choice);
+		printf("\n\n");
+	}
+	else if (choice == 't') {
+		inorderwithcount(root);
+		printf("\n");
+	}
+	else if (choice == 'c')
+		break;
 
     }
-        return 0;
+	return 0;
     
 }
