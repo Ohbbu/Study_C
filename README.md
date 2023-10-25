@@ -9,3 +9,6 @@
 # 9_26
 <img src="./practice5/BST_result_1.png"/>
 <img src="./practice5/BST_result_2.png"/>
+
+#10_12
+<img src="./max_heap/max_heap_result.png">
