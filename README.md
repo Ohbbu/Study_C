@@ -12,3 +12,6 @@
 
 #10_12
 <img src="./max_heap/max_heap_result.png">
+
+#kruskal
+<img src="./kruskal/kruskal_qsort.png">
