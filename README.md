@@ -14,4 +14,7 @@
 <img src="./max_heap/max_heap_result.png">
 
 #graph
-<img src="./graph/graph_result.png">
+<img src="./graph/graph_result.png"/>
+
+#prim
+<img src="./prim/prim_result.png"/>
