@@ -25,3 +25,6 @@
 
 # Dijksra
 <img src="./Dijkstra/Dijksra_Adjacent_Result.png"/>
+
+# Floyd
+<img src="./Floyd/Floyd_result.png"/>
